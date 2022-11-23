@@ -1,0 +1,2 @@
+This is Awesome: This is the 1st Promise resolved
+ This is the 2nd Promise resolved

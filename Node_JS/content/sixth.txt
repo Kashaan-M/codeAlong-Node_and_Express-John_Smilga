@@ -1,0 +1,3 @@
+This file was created using "fs.writeFile()" inside 'fs_async_module.js' by reading 'fourth.txt' which was 'This is the fourth text file
+' and by reading 'fifth.txt' which was 'This is the fifth text file
+'
