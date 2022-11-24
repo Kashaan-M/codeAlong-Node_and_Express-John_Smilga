@@ -12,11 +12,8 @@ app.use(morgan('tiny'));
 app.use(express.static(resolve(__dirname, './public')));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
-// routes
-app.get('/hello', (req, res) => {
-  res.send('Task Manager App');
-});
 
+// routes
 app.use('/api/v1/tasks', tasks);
 
 const port = 3000;
