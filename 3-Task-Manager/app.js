@@ -1,26 +1,23 @@
 const express = require('express');
 const app = express();
-const morgan = require('morgan');
-const { resolve } = require('path');
 const tasks = require('./routes/tasks');
 const connectDB = require('./db/connect');
 require('dotenv').config();
 const notFound = require('./middleware/not-found');
+const errorHandlerMiddleware = require('./middleware/error-handler');
 
-// logger
-app.use(morgan('tiny'));
 // middleware
-app.use(express.static(resolve(__dirname, './public')));
-app.use(express.urlencoded({ extended: false }));
+
+app.use(express.static('./public'));
 app.use(express.json());
 
 // routes
 
 app.use('/api/v1/tasks', tasks);
-// 404 route and middleware on below line for all the routes that don't exist
-app.use(notFound);
 
-const port = 3000;
+app.use(notFound);
+app.use(errorHandlerMiddleware);
+const port = process.env.PORT || 3000;
 
 const start = async () => {
   try {
