@@ -11,7 +11,7 @@ app.use(morgan('tiny'));
 // static assets
 app.use(express.static('../../node-express-course/02-express-tutorial/methods-public/'));
 
-// parses the form data(for POST requests) and adds the values to req.body. NOTE: req.body will be undefined unless we write the below line of code
+// parses incoming requests with urlencoded payloads and adds the values to req.body. NOTE: req.body will be undefined unless we write the below line of code
 app.use(express.urlencoded({ extended: false }));
 
 app.get('/api/people', (req, res) => {
