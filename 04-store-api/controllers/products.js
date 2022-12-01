@@ -27,7 +27,7 @@ const getAllProducts = async (req, res) => {
       '<': '$lt',
       '<=': '$lte',
     };
-    const regEx = /\b(<|>|>=|=|<=)\b/g;
+    const regEx = /(<|>|>=|=|<=)/g;
     let filters = numericFilters.replace(regEx, (match) => `-${operatorMap[match]}-`);
     const options = ['price', 'rating'];
     filters = filters.split(',').forEach((item) => {
