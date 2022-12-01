@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const bcrypt = require('bcryptjs');
 
 const userSchema = new mongoose.Schema({
   name: {
@@ -21,6 +22,23 @@ const userSchema = new mongoose.Schema({
     required: [true, 'Please provide password'],
     minLength: 6,
   },
+});
+
+/* check https://mongoosejs.com/docs/middleware.html */
+userSchema.pre('save', async function (next) {
+  // using function() so we can use `this` keyword . `this` will refer to the `document` in mongodb which is an instance of the `User` model
+  /* console.log('this == ', this)
+   * OUTPUT: 
+   * this ==  {
+      name: 'zaid',
+      email: 'zaid2@alpha.com',
+      password: '12asd3456', // NOTE password is not hashed yet!
+      _id: new ObjectId("6388a40f1be4f8d10101ec6f")
+    }
+  */
+  const salt = await bcrypt.genSalt(10);
+  this.password = await bcrypt.hash(this.password, salt);
+  next();
 });
 
 module.exports = mongoose.model('User', userSchema);
