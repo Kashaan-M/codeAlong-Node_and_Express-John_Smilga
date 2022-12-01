@@ -25,7 +25,7 @@ const userSchema = new mongoose.Schema({
 });
 
 /* check https://mongoosejs.com/docs/middleware.html */
-userSchema.pre('save', async function (next) {
+userSchema.pre('save', async function () {
   // using function() so we can use `this` keyword . `this` will refer to the `document` in mongodb which is an instance of the `User` model
   /* console.log('this == ', this)
    * OUTPUT: 
@@ -38,7 +38,6 @@ userSchema.pre('save', async function (next) {
   */
   const salt = await bcrypt.genSalt(10);
   this.password = await bcrypt.hash(this.password, salt);
-  next();
 });
 
 module.exports = mongoose.model('User', userSchema);
