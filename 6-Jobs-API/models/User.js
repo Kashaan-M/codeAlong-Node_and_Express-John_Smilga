@@ -40,4 +40,9 @@ userSchema.pre('save', async function () {
   this.password = await bcrypt.hash(this.password, salt);
 });
 
+/* check https://mongoosejs.com/docs/guide.html#methods */
+userSchema.methods.getName = function () {
+  return this.name;
+};
+
 module.exports = mongoose.model('User', userSchema);
