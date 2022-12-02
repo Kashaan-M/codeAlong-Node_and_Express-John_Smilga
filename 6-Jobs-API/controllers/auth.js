@@ -8,7 +8,6 @@ const register = async (req, res) => {
   /* The below BadRequest error is optional since we are already using the error-handler middleware for it , hence we comment this part out */
   //throw new BadRequestError('Please provide name,email and password');
   //}
-  /* password hashing with bcryptjs */
 
   const user = await User.create({ ...req.body });
   const token = user.createJWT();
