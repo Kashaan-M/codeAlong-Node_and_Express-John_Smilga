@@ -32,7 +32,7 @@ app.use(
 
 app.use(express.json());
 // extra packages
-app.use(morgan('tiny'));
+app.use(morgan('dev'));
 app.use(helmet());
 app.use(cors());
 app.use(xss());
